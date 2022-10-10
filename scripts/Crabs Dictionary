@@ -1,0 +1,25 @@
+Colums for crabs.csv
+
+1. Color
+The Color column shows the color of each crab entered in the dataset.
+
+2. Sex
+The Sex column shows the sex of each crab entered in the dataset.
+
+3. Frontal_Lobe
+The Frontal_Lobe column shows the length in mm of the frontal lobe of each crab in the dataset.
+
+4. Rear_Width
+The Rear_Width column shows the width in mm of the rear of each crab in the dataset.
+
+5. Carapace_Length
+The Carapace_Length column shows the length in mm of the carapace of each crab in the dataset.
+
+6. Carapace_Width
+The Carapace_Width column shows the width in mm of the carapace of each crab in the dataset.
+
+7. Body_Depth
+The Body_Depth column measures in mm the thickness of each crab's body in the dataset.
+
+8. Latitude
+The Latitude column shows at which latitude each crab was caught.
