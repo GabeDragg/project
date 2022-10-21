@@ -1,0 +1,122 @@
+---
+title: "project_two"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+For this first part of the exam, you can either use surveys_complete.csv or your own data. If you are using your own data, you must have data in which you think you have a numerical predictor variable and a numerical response variable. If you are using surveys_complete, you can use weight and hindfoot_length for this.
+
+Save this file in your projects directory. You can either save it in a project two subdirectory, or just put it in projects. Either way is fine.
+
+Load in your data. Which variable will you be using as a predictor, and which as a response? (5 pts)
+
+```{r}
+surveys <- read.csv("data/surveys_complete.csv")
+```
+
+The weight column will be the predictor and the hindfoot_length column will be the response.
+
+Plot the two against each other with a scatter plot. Do the data appear to be related linearly? (5 pts)
+
+```{r}
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
++ geom_point()
+```
+
+The data does not appear to be related linearly.
+
+Fit the linear model. View the summary. (5 pts)
+
+```{r}
+lm_surveys <- lm(hindfoot_length ~ weight, data = surveys)
+summary(lm_surveys)
+```
+
+Does the summary make sense when you compare it to the plot you made? 
+Does our model have good predictive power? Evaluate the residual standard error, intercept, and R-Squared in particular. Would you say your predictor predicts the response? (10 pts)
+
+The adjusted R-squared shows that 46% of the hindfoot length can be explained by weight. Having a residual standard error closer to 0 shows a more fit model, and the residual standard error is 6.964. The intercept shows the estimated hindfoot length of 21.57 with a standard error of 0.0612. From this information, I would say that the predictor does not predict the response.
+
+Plot the model on the graph. Increase the size of the text so it is comfortably readable at 5 feet. Make sure axis labels are readable and not overlapping with one another. (5 pts)
+
+```{r}
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
++ geom_point() +
++ geom_smooth(method = "lm", color = "navy", size = 0.5, fill = "deeppink") +
++ labs(x = "Weight", y = "Hindfoot Length", size = 5)
+```
+
+Check the normality of the residuals. Do they look OK? Are we violating assumptions? (5 pts)
+
+```{r}
+qqnorm(lm_surveys_aug$.resid)
+qqline(lm_surveys_aug$.resid, col="red")
+```
+
+The normality of the residuals look okay, and we are not violating assumptions.
+
+Why is normality of residuals important?
+
+Residuals show the error in the response after consideration of the predictor. Normality of residuals is important because the predictor can never capture 100% of the variation in the response.
+
+If you are using surveys_complete: Is there interspecific variation in the linear model? Hint: look at our prior work with facet plots. (15 pts)
+
+There is interspecifc variation in the linear model because it represents all of the species in the dataset. However, the plot does not fit the linear model. Grouping the data by species may show a different linear model for each species that fits the prediction of hindfoot length by weight.
+
+Part Two
+
+In this portion, you are free to use your own data if you have a categorical predictor variable and a response variable. Otherwise, you may use the columns sex and weight in surveys_complete
+
+First, plot the data grouped by sex (5 pts)
+
+```{r}
+ggplot(surveys, aes(x = sex, y = weight, color=sex)) +
++ geom_jitter()
+```
+
+Try an ANOVA of this data (5 pt)
+
+```{r}
+anova_surveys_sw <- aov(surveys_sw)
+```
+
+How about a linear model? What information does this give you that an ANOVA can’t? (5 pts)
+
+```{r}
+surveys_sw <- lm(weight ~ sex, data = surveys)
+```
+
+The linear model gives us the standard error of the sample data to see how close or far it is from the calculated values of what is expected.
+
+Plot the lm with the data, with points colored by sex. (10 pts)
+
+```{r}
+ggplot(surveys, aes(x = sex, y = weight, color=sex)) +
++ geom_jitter() +
++ geom_smooth(method = "lm", color = "navy", size = 0.5, fill = "deeppink")
+```
+
+Choose any model we’ve looked at so far, but use two predictor variables. Perform an LM, plot the results, and state if this changes your interpretation of the relationship between variables (10 pts)
+
+```{r}
+swsurveys_hfl <- lm(hindfoot_length ~ weight + sex, data = surveys)
+```
+
+```{r}
+# Plot Code Here 
+```
+
+# Text answer here
+
+Part Three
+
+Add and commit this document (5 pts)
+
+
+Push your changes to github (10 pts)
+
+
+MS students
+
+My expectation is that you’ll do this with your own data. If any part of this doesn’t make sense with your data, please get in touch ASAP so we can work it out.
